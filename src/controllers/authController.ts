@@ -52,10 +52,11 @@ export const signup =async (req: Request, res: Response, next: NextFunction) => 
           console.log(err);
         }); 
     }
-    catch(err){
+    catch(err: any){
         console.log(err);
         res.status(500).json({
           status: "error",
+          message: e.message || "an error ocurred"
         });  
     }
 }
