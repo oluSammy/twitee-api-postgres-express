@@ -22,8 +22,8 @@ export const signup = async (
     const email = req.body.email;
     const name = email.substring(0, email.lastIndexOf('@'));
 
-    console.log(getConnection(), 'CONNECTION');
-    console.log(getConnection().createQueryBuilder(), 'CONNECTION');
+    // console.log(getConnection(), 'CONNECTION');
+    console.log(getConnection().createQueryBuilder().subQuery(), 'CONNECTION');
 
     res.send("wor***ing")
 
