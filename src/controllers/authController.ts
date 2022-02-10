@@ -23,44 +23,44 @@ export const signup = async (
     const name = email.substring(0, email.lastIndexOf('@'));
 
     // console.log(getConnection(), 'CONNECTION');
-    console.log(getConnection().createQueryBuilder().subQuery(), 'CONNECTION');
+    // console.log(getConnection().createQueryBuilder().subQuery(), 'CONNECTION');
 
-    res.send("wor***ing")
+    // res.send("wor***ing")
 
-    // const user = await getConnection()
-    //   .createQueryBuilder()
-    //   .insert()
-    //   .into(User)
-    //   .values([
-    //     {
-    //       name: name,
-    //       email: req.body.email,
-    //       password: password,
-    //     },
-    //   ])
-    //   .returning('*')
-    //   .execute();
+    const user = await getConnection()
+      .createQueryBuilder()
+      .insert()
+      .into(User)
+      .values([
+        {
+          name: name,
+          email: req.body.email,
+          password: password,
+        },
+      ])
+      .returning('*')
+      .execute();
 
-    // console.log(user, '***');
-    // const token = generateToken(user.raw[0].id, user.raw[0].email);
-    // const data = user.raw;
-    // res.status(201).json({
-    //   status: 'success',
-    //   data: { data, token },
-    // });
+    console.log(user, '***');
+    const token = generateToken(user.raw[0].id, user.raw[0].email);
+    const data = user.raw;
+    res.status(201).json({
+      status: 'success',
+      data: { data, token },
+    });
 
-    // sendEmail(
-    //   user.raw[0].email,
-    //   'Email Verification',
-    //   `<p>Hello ${user.raw[0].name},</p><p>Thank you for signing up for a Twitter account.
-    //      Welcome onboard!!!,</p>`
-    // )
-    //   .then(() => {
-    //     console.log('email sent');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    sendEmail(
+      user.raw[0].email,
+      'Email Verification',
+      `<p>Hello ${user.raw[0].name},</p><p>Thank you for signing up for a Twitter account.
+         Welcome onboard!!!,</p>`
+    )
+      .then(() => {
+        console.log('email sent');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (err: any) {
     console.log(err);
     res.status(500).json({
