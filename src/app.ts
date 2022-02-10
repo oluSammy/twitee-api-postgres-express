@@ -3,6 +3,7 @@ import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cors from "cors"
 import dotenv from "dotenv";
 import { createConnection, getConnection } from "typeorm";
 import { User } from "./entities/userEntity";
@@ -29,7 +30,9 @@ createConnection(pgconfig)
 
 console.log(process.env.EMAIL_PORT)
 
+
 const app = express();
+app.use(cors())
 
 // view engine setup
 app.set("views", path.join(__dirname, "../views"));
