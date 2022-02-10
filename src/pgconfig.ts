@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log(__dirname);
+console.log(process.env.PG_PASSWORD, "************");
 
 const pgconfig: ConnectionOptions = {
   type: 'postgres',
