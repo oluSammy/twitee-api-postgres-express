@@ -11,8 +11,8 @@
     "compile:watch": "yarn tsc -w",
     "start:prod": "NODE_ENV=production nodemon ./bin/www",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js --config src/pgconfig.ts",
-    "generate:migration": "yarn typeorm migration:generate -n",
-    "run:migration": "yarn typeorm migration:run -n deployment",
+    "generate:migration": "yarn typeorm migration:generate-n deployment",
+    "run:migration": "yarn typeorm migration:run",
     "test": "yarn generate:migration && yarn run:migration"
   },
   "dependencies": {
