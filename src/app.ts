@@ -16,6 +16,8 @@ import usersRouter from "./routes/users";
 // createConnection().then(connection => {
 //   const userRepository = connection.getRepository('');
 // })
+dotenv.config();
+
 createConnection(pgconfig)
   .then(() => {
     console.log("connected to database");
@@ -24,7 +26,6 @@ createConnection(pgconfig)
     console.log("err", err);
   });
 
-dotenv.config();
 
 console.log(process.env.EMAIL_PORT)
 

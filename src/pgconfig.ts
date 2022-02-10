@@ -3,15 +3,18 @@ import { User } from "./entities/userEntity"
 import { Twit } from "./entities/twitEntity"
 import { Comment } from "./entities/commentEntity"
 import { Like } from "./entities/likeEntity"
+import dotenv from "dotenv";
+
+dotenv.config();
 
 
  const pgconfig: ConnectionOptions = {
   type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "decagon",
-  password: "",
-  database: "twitee",
+  host: process.env.PG_HOST,
+  port: +(process.env.PG_PORT as string),
+  username: process.env.PG_USERNAME,
+  password: process.env.PG_PASSWORD,
+  database: process.env.PG_DB,
   entities: [User, Twit, Comment, Like],
   migrations: ["migration/*.js"],
   cli: { migrationsDir: "migration" },

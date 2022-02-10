@@ -32,6 +32,8 @@ export const signup =async (req: Request, res: Response, next: NextFunction) => 
       ])
       .returning("*")
       .execute();
+
+      console.log(user, '***')
     const token = generateToken(user.raw[0].id, user.raw[0].email);
     const data = user.raw
     res.status(201).json({
