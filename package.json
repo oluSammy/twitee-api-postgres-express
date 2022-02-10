@@ -7,7 +7,7 @@
     "dev": "nodemon ./bin/www",
     "build": "tsc",
     "clean": "rm -rf dist && mkdir dist",
-    "heroku-postbuild": "yarn clean && yarn build && yarn generate:migration && run:migration",
+    "heroku-postbuild": "yarn clean && yarn build && yarn generate:migration && yarn run:migration",
     "compile:watch": "yarn tsc -w",
     "start:prod": "NODE_ENV=production nodemon ./bin/www",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js --config src/pgconfig.ts",
