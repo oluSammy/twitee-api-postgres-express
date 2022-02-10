@@ -1,5 +1,8 @@
 import { ConnectionOptions } from 'typeorm';
-
+// import { User } from './entities/userEntity';
+// import { Twit } from './entities/twitEntity';
+// import { Comment } from './entities/commentEntity';
+// import { Like } from './entities/likeEntity';
 import dotenv from 'dotenv';
 
 dotenv.config();
