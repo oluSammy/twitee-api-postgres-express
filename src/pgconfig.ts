@@ -20,7 +20,7 @@ const pgconfig: ConnectionOptions = {
   entities: [`${__dirname}/entities/*.js`],
   migrations: ['migration/*.js'],
   cli: { migrationsDir: 'migration' },
-  // ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false },
   // syncronize: true, 'src/entity/*.ts', './build/src/entity/*.js'
 };
 
