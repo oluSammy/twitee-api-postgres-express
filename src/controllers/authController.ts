@@ -56,7 +56,7 @@ export const signup =async (req: Request, res: Response, next: NextFunction) => 
         console.log(err);
         res.status(500).json({
           status: "error",
-          message: e.message || "an error ocurred"
+          message: err.message || "an error ocurred"
         });  
     }
 }
