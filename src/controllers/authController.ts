@@ -114,7 +114,8 @@ export const protectRoute = async (
   res: Response,
   next: NextFunction
 ) => {
-  let token: string | undefined;
+  try{
+    let token: string | undefined;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -137,4 +138,12 @@ export const protectRoute = async (
   req.user = data;
 
   next();
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json({
+      status: 'error',
+    });
+  }
+  
 };
