@@ -46,9 +46,9 @@ export const getLikes = async (req: Request, res: Response) => {
   try {
     const likes = await getRepository(Like)
       .createQueryBuilder("like")
-      .getCount();
-    // .getMany();
-    // .where("like.twitId = :twitId", {twitId: req.params.id })
+      .where("like.twitId = :twitId", {twitId: req.params.id })
+      .getMany();
+    
 
     res.status(201).json({
       status: "success",
@@ -62,3 +62,30 @@ export const getLikes = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const deleteLikesRow = async (req: Request, res: Response) => {
+  try {
+   
+    const user = req.user.id;
+    const data = await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(Like)
+      .where("id > 10")
+      .execute();
+
+
+    res.status(201).json({
+      status: "success",
+      message: "likes deleted!",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "error",
+    });
+  }
+};
+
+
