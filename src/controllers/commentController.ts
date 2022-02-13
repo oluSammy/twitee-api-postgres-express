@@ -6,7 +6,6 @@ import { Comment } from '../entities/commentEntity';
 export const createComment = async (req: Request, res: Response) => {
     try{
       const user = req.user.id
-    //   console.log(req.user)
     
         const comment = await getConnection()
         .createQueryBuilder()

@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from "typeorm";
 import { User } from "./userEntity";
-import { Comment } from "./commentEntity";
+
 
 @Entity()
 export class Twit {

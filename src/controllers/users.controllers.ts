@@ -13,7 +13,6 @@ export const createUser = async (req: Request, res: Response) => {
       ])
       .returning("*")
       .execute();
-      //console.log(user.raw[0])
 
     res.status(201).json({
       status: "success",

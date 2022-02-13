@@ -7,8 +7,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log(process.env.PG_PASSWORD, "************");
-
 const pgconfig: ConnectionOptions = {
   type: 'postgres',
   host: process.env.PG_HOST,
@@ -20,7 +18,7 @@ const pgconfig: ConnectionOptions = {
   entities: [`${__dirname}/entities/*.js`],
   migrations: ['migration/*.js'],
   cli: { migrationsDir: 'migration' },
-  ssl: { rejectUnauthorized: false },
+  // ssl: { rejectUnauthorized: false },
   // syncronize: true, 'src/entity/*.ts', './build/src/entity/*.js'
 };
 

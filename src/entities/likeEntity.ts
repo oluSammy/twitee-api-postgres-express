@@ -3,12 +3,14 @@ import {
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
+    Unique,
     ManyToOne,
   } from "typeorm";
   import { User } from "./userEntity";
   import { Twit } from "./twitEntity";
   
   @Entity()
+  @Unique(["twit", "user_id"])
   export class Like {
     @PrimaryGeneratedColumn()
     id: number;

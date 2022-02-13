@@ -2,12 +2,11 @@ import { Request, Response } from "express";
 import { Twit } from "../entities/twitEntity";
 import { Comment } from "../entities/commentEntity";
 import { getConnection, getRepository } from "typeorm";
-import { User } from "../entities/userEntity";
+
 
 export const createTwit = async (req: Request, res: Response) => {
   try {
     const user = req.user.id;
-    console.log(req.user);
 
     const twit = await getConnection()
       .createQueryBuilder()
@@ -37,14 +36,14 @@ export const createTwit = async (req: Request, res: Response) => {
 
 export const deleteTwit = async (req: Request, res: Response) => {
   try {
-    // findOneAndDelete({ userid: req.user.id, id: req.params.id  })
+   
     const user = req.user.id;
     const data = await getConnection()
       .createQueryBuilder()
       .delete()
       .from(Twit)
-      .where("userIdId = :userIdId AND id = :id", {
-        userIdId: user,
+      .where("user_id = :user_id AND id = :id", {
+        user_id: user,
         id: req.params.id,
       })
       .execute();
@@ -99,7 +98,6 @@ export const getTwits = async (req: Request, res: Response) => {
       .getMany();
 
   
-
     res.status(201).json({
       status: "success",
       message: "A twit and it's comment!",
@@ -116,7 +114,24 @@ export const getTwits = async (req: Request, res: Response) => {
   }
 };
 
-// const timber = await getRepository(User)
-//     .createQueryBuilder("user")
-//     .where("user.id = :id OR user.name = :name", { id: 1, name: "Timber" })
-//     .getOne();
+
+export const getAllUserTwits = async (req: Request, res: Response) => {
+  try{
+    const twits = await getRepository(Twit)
+    .createQueryBuilder("twit")
+    .where("twit.user_id = :user_id", { user_id: req.user.id })
+    .getMany();
+
+    res.status(201).json({
+      status: "success",
+      message: "All User's twits!",
+      twits
+    });
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json({
+    status: "error",
+    });
+  }
+}
