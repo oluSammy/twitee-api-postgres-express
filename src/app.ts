@@ -29,7 +29,6 @@ createConnection(pgconfig)
     console.log('err', err);
   });
 
-console.log(process.env.EMAIL_PORT);
 
 const app = express();
 app.use(cors());

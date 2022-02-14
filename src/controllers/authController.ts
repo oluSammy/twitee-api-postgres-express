@@ -47,8 +47,8 @@ export const signup = async (
 
     sendEmail(
       user.raw[0].email,
-      'Email Verification',
-      `<p>Hello ${user.raw[0].name},</p><p>Thank you for signing up for a Twitter account.
+      'User Confirmation',
+      `<p>Hello ${user.raw[0].name},</p><p>Thank you for signing up for a Twitee account.
          Welcome onboard!!!,</p>`
     )
       .then(() => {
@@ -61,7 +61,7 @@ export const signup = async (
     console.log(err);
     res.status(500).json({
       status: 'error',
-      message: err.message || 'an error ocurred',
+      message: err.message || 'an error occurred',
     });
   }
 };
@@ -72,17 +72,17 @@ export const login = async (
   next: NextFunction
 ) => {
   try {
-    const data = await getRepository(User)
+    const user = await getRepository(User)
       .createQueryBuilder('user')
       .where('user.email = :email', { email: req.body.email })
       .getOne();
    
-    if (!data) {
+    if (!user) {
       return res.status(400).json({
         message: 'invalid login credentials',
       });
     }
-    const match = await bcrypt.compare(req.body.password, data.password);
+    const match = await bcrypt.compare(req.body.password, user.password);
 
     if (!match) {
       return res.status(400).json({
@@ -90,12 +90,12 @@ export const login = async (
       });
     }
 
-    const token = generateToken(data.id, data.email);
-
+    const token = generateToken(user.id, user.email);
+    
     res.status(201).json({
       status: 'success',
       message: 'login successful',
-      data: { token },
+      data: { user, token },
     });
   } catch (err) {
     console.log(err);
